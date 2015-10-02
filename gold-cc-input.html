@@ -77,7 +77,7 @@ style this element.
         disabled$="[[disabled]]"
         no-label-float="[[noLabelFloat]]"
         always-float-label="[[_computeAlwaysFloatLabel(alwaysFloatLabel,placeholder)]]"
-        invalid="[[invalid]]">
+        invalid="{{invalid}}">
 
       <label hidden$="[[!label]]">[[label]]</label>
 
@@ -133,6 +133,10 @@ style this element.
         value: "Card number"
       },
 
+      invalid: {
+          type: Boolean,
+          value: false
+      },
       /**
        * The type of the credit card, if it is valid. Empty otherwise.
        */
@@ -205,6 +209,7 @@ style this element.
       this.cardType = valid ? result.card_type.name : '';
 
       // Update the container and its addons (i.e. the custom error-message).
+      this.invalid = !valid;
       this.$.container.invalid = !valid;
       this.$.container.updateAddons({
         inputElement: this.$.input,
